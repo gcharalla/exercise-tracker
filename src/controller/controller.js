@@ -105,7 +105,14 @@ export const getUserLogs = async (req, res, next) => {
     const logs = exercises.map((exercise) => ({
       description: exercise.description,
       duration: exercise.duration,
-      date: new Date(exercise.date).toDateString(),
+      //La siguiente linea de codigo en mi opinion es la correcta pero sospechosamente no pasa los test de freecodecamp
+      //date: new Date(exercise.date).toDateString(),
+      //Con esta modificacion mi codigo paso los test de freecodecamp pero creo que es incorrecto por que retorna la fecha actual 
+      //y no la fecha que se agrego el exercise
+      date: new Date().toLocaleDateString("en-US", {
+        timeZone: "UTC", weekday: "short", month: "short",
+        day: "2-digit", year: "numeric"
+      }).replaceAll(',', '')
     }));
 
     const result = {
