@@ -10,8 +10,8 @@ const exerciseSchema = new mongoose.Schema({
     },
     description:{ type:String, required: true},
     duration:{ type: Number, required: true, min:0 },
-    //date: { type: String, match: /^\d{4}-\d{2}-\d{2}$/, required: true }
-    date: { type: String, required: true}
+    date: { type: String, match: /^\d{4}-\d{2}-\d{2}$/, required: true }
+    //date: { type: String, required: true}
 })
 
 export const exerciseModel = mongoose.model(exerciseCollectionName, exerciseSchema)

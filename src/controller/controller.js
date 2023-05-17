@@ -51,7 +51,7 @@ export const addExercise = async (req, res, next) => {
     // Obtener los componentes de la fecha en el formato deseado
     const formattedDate = dateObj.toDateString();
 
-    const result = await exerciseModel.create({ user: userId, description, duration, date: formattedDate });
+    const result = await exerciseModel.create({ user: userId, description, duration, date: rawDate });
 
     const { _id, username } = user;
     res.json({ _id, username, date: formattedDate, duration: result.duration, description: result.description });
@@ -105,7 +105,7 @@ export const getUserLogs = async (req, res, next) => {
     const logs = exercises.map((exercise) => ({
       description: exercise.description,
       duration: exercise.duration,
-      date: exercise.date,
+      date: new Date(exercise.date).toDateString(),
     }));
 
     const result = {
@@ -121,6 +121,7 @@ export const getUserLogs = async (req, res, next) => {
     next(error);
   }
 };
+
 
 export const getUsers = async (req,res,next) => {
   try {
