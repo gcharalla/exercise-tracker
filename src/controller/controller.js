@@ -121,3 +121,14 @@ export const getUserLogs = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUsers = async (req,res,next) => {
+  try {
+    
+    const users = await userModel.find();
+
+    res.json(users);
+  } catch (error) {
+    next(error)
+  }
+}
